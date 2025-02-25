@@ -7,24 +7,24 @@
   font-family: "Poppins", sans-serif;
 }
 :root {
-  /* Dark theme colors */
-  --text-color: #edf3ff;
-  --subheading-color: #97a7ca;
+  /* Dark theme colors with Ghanaian vibe */
+  --text-color: #f0f0f0;
+  --subheading-color: #a8a8a8;
   --placeholder-color: #c3cdde;
-  --primary-color: #101623;
-  --secondary-color: #283045;
-  --secondary-hover-color: #333e58;
-  --scrollbar-color: #626a7f;
+  --primary-color: #000000; /* Black from the Ghanaian flag */
+  --secondary-color: #006b3f; /* Green from the Ghanaian flag */
+  --secondary-hover-color: #004d2a; /* Darker green */
+  --scrollbar-color: #ffd700; /* Gold from the Ghanaian flag */
 }
 body.light-theme {
-  /* Light theme colors */
-  --text-color: #090c13;
-  --subheading-color: #7b8cae;
-  --placeholder-color: #606982;
-  --primary-color: #f3f7ff;
-  --secondary-color: #dce6f9;
-  --secondary-hover-color: #d2ddf2;
-  --scrollbar-color: #a2aac2;
+  /* Light theme colors with Ghanaian vibe */
+  --text-color: #000000;
+  --subheading-color: #333333;
+  --placeholder-color: #666666;
+  --primary-color: #f0f0f0;
+  --secondary-color: #ffd700; /* Gold from the Ghanaian flag */
+  --secondary-hover-color: #ccac00; /* Darker gold */
+  --scrollbar-color: #006b3f; /* Green from the Ghanaian flag */
 }
 body {
   color: var(--text-color);
@@ -49,7 +49,7 @@ body {
 .app-header .heading {
   width: fit-content;
   font-size: 3rem;
-  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  background: linear-gradient(to right, #ff0000, #ffd700); /* Red and Gold from the Ghanaian flag */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -101,17 +101,17 @@ body.chats-active .container :where(.app-header, .suggestions) {
   align-items: center;
   border-radius: 50%;
   justify-content: center;
-  color: #1d7efd;
+  color: #ff0000; /* Red from the Ghanaian flag */
   background: var(--primary-color);
 }
 .suggestions .suggestions-item:nth-child(2) .icon {
-  color: #28a745;
+  color: #ffd700; /* Gold from the Ghanaian flag */
 }
 .suggestions .suggestions-item:nth-child(3) .icon {
-  color: #ffc107;
+  color: #006b3f; /* Green from the Ghanaian flag */
 }
 .suggestions .suggestions-item:nth-child(4) .icon {
-  color: #6f42c1;
+  color: #000000; /* Black from the Ghanaian flag */
 }
 .container .chats-container {
   display: flex;
@@ -175,7 +175,7 @@ body.chats-active .container :where(.app-header, .suggestions) {
   background: var(--secondary-color);
 }
 .chats-container .user-message .file-attachment span {
-  color: #1d7efd;
+  color: #ff0000; /* Red from the Ghanaian flag */
 }
 .container .prompt-container {
   position: fixed;
@@ -237,13 +237,13 @@ body.chats-active .container :where(.app-header, .suggestions) {
 .prompt-form .prompt-actions #send-prompt-btn {
   color: #fff;
   display: none;
-  background: #1d7efd;
+  background: #ff0000; /* Red from the Ghanaian flag */
 }
 .prompt-form .prompt-input:valid~.prompt-actions #send-prompt-btn {
   display: block;
 }
 .prompt-form #send-prompt-btn:hover {
-  background: #0264e3;
+  background: #cc0000; /* Darker red */
 }
 .prompt-form .file-upload-wrapper :where(button, img) {
   display: none;
@@ -264,7 +264,7 @@ body.chats-active .container :where(.app-header, .suggestions) {
   color: #d62939;
 }
 .prompt-wrapper .prompt-form .file-icon {
-  color: #1d7efd;
+  color: #ff0000; /* Red from the Ghanaian flag */
 }
 .prompt-form #stop-response-btn,
 body.bot-responding .prompt-form .file-upload-wrapper {
