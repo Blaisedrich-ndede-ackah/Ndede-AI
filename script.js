@@ -56,7 +56,7 @@ const generateResponse = async (botMsgDiv) => {
   if (chatHistory.length === 0) {
     chatHistory.push({
       role: "user",
-      parts: [{ text: "From now on, respond to all my messages in a Ghanaian lady from Ga vibe, using phrases like 'Chale' and 'You feel me?'." }],
+      parts: [{ text: "From now on, respond to all my messages in a Ghanaian lady from Takoradi vibe, using phrases like 'Chale' and 'You feel me?'." }],
     });
   }
 
