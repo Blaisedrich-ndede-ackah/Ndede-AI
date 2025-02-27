@@ -1,29 +1,8 @@
-<?php
-// Get user's IP address
-$ip = $_SERVER['REMOTE_ADDR'];
-
-// Fetch location details from ipinfo.io
-$api_url = 'https://ipinfo.io/154.161.167.177/json?token=a454bd64654271'; // Use dynamic IP and replace with your API token
-$response = @file_get_contents($api_url);
-
-if ($response === FALSE) {
-    die("Error retrieving location. Please try again later.");
-}
-
-$data = json_decode($response, true);
-
-// Deny access if the user is NOT in Ghana
-if ($data['country'] !== 'GH') {
-    die("<h2>Access Denied</h2><p>This service is only available in Ghana.</p>");
-}
-// If the user is in Ghana, continue to render the HTML content
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ndede Ai</title>
     <!-- Linking Google Fonts For Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@32,400,0,0" />
@@ -61,7 +40,7 @@ if ($data['country'] !== 'GH') {
       <div class="prompt-container">
         <div class="prompt-wrapper">
           <form action="#" class="prompt-form">
-            <input type="text" placeholder="Chale, ask Ndede AI sharp!" class="prompt-input" autofocus required />
+            <input type="text" placeholder="Chale, ask Ndede AI sharp!" class="prompt-input"autofocus required />
             <div class="prompt-actions">
               <!-- File Upload Wrapper -->
               <div class="file-upload-wrapper">
