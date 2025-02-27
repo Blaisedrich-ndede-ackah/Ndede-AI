@@ -1,9 +1,10 @@
+
 <?php
 // Get user's IP address
 $ip = $_SERVER['REMOTE_ADDR'];
 
 // Fetch location details from ipinfo.io
-$api_url = 'https://ipinfo.io/' . $ip . '/json?token=a454bd64654271'; // Use dynamic IP and replace with your API token
+$api_url = 'https://ipinfo.io/154.161.167.177/json?token=a454bd64654271'; // Use dynamic IP and replace with your API token
 $response = @file_get_contents($api_url);
 
 if ($response === FALSE) {
