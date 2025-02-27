@@ -14,7 +14,7 @@ $data = json_decode($response, true);
 
 // Redirect if the user is in Ghana
 if ($data['country'] === 'GH') {
-    header("Location: dashbord.html");
+    header("Location: https://blaisedrich-ndede-ackah.github.io/Ndede-AI/dashbord.html");
     exit();
 }
 
