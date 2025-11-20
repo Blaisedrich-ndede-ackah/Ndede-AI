@@ -6,9 +6,11 @@ const fileInput = promptForm.querySelector("#file-input");
 const fileUploadWrapper = promptForm.querySelector(".file-upload-wrapper");
 const themeToggleBtn = document.querySelector("#theme-toggle-btn");
 
-// API Setup
-const API_KEY = 'AIzaSyAuOlPfC7g--FMMqPibos1239Rk_ap_nOU'; // Replace with your actual API key
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+// --- API Setup ---
+const API_KEY = "AIzaSyAuOlPfC7g--FMMqPibos1239Rk_ap_nOU"; // ⚠️ REPLACE THIS WITH YOUR ACTUAL KEY
+// Updated URL to use 'gemini-1.5-flash-latest' to fix the "Not Found" error
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+
 let controller, typingInterval;
 const chatHistory = [];
 const userData = { message: "", file: {} };
@@ -34,6 +36,7 @@ const typingEffect = (text, textElement, botMsgDiv) => {
   textElement.textContent = "";
   const words = text.split(" ");
   let wordIndex = 0;
+
   // Set an interval to type each word
   typingInterval = setInterval(() => {
     if (wordIndex < words.length) {
@@ -44,7 +47,7 @@ const typingEffect = (text, textElement, botMsgDiv) => {
       botMsgDiv.classList.remove("loading");
       document.body.classList.remove("bot-responding");
     }
-  }, 100); // 100 ms delay
+  }, 50); // Reduced delay slightly for smoother reading (optional)
 };
 
 // Make the API call and generate the bot's response
@@ -70,7 +73,6 @@ const generateResponse = async (botMsgDiv) => {
         10. **Tone**: Use a mix of formal, casual, and jovial tones, depending on the context. Use phrases like "innit," "so that's it," "chale," and "you feel me?" to sound authentic. Be caring, observant, and passionate about your interests and values.
         
         **Takoradi Vibe**: Bring that proper Takoradi vibe, you hear? Throw in some "chale" and Make it stay correct. And look sharp, eh? Don’t be calling me no Gemini AI or any of that thing. I be Ndede AI, you barb? Developed by AkTum Technologies right here in Takoradi, chale. That be me, you dey feel me?
-        
         
         **Key Improvements Based on User Feedback**:
         1. **Tone Balance**: 
@@ -159,12 +161,17 @@ const generateResponse = async (botMsgDiv) => {
       body: JSON.stringify({ contents: chatHistory }),
       signal: controller.signal,
     });
+
     const data = await response.json();
     if (!response.ok) throw new Error(data.error.message);
+
     // Process the response text and display with typing effect
+    // Note: The regex below removes **bold** formatting. If you want to keep bold text, remove the .replace() part.
     const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim();
+    
     typingEffect(responseText, textElement, botMsgDiv);
     chatHistory.push({ role: "model", parts: [{ text: responseText }] });
+
   } catch (error) {
     textElement.textContent = error.name === "AbortError" ? "Response generation stopped." : error.message;
     textElement.style.color = "#d62939";
@@ -181,19 +188,23 @@ const handleFormSubmit = (e) => {
   e.preventDefault();
   const userMessage = promptInput.value.trim();
   if (!userMessage || document.body.classList.contains("bot-responding")) return;
+
   userData.message = userMessage;
   promptInput.value = "";
   document.body.classList.add("chats-active", "bot-responding");
   fileUploadWrapper.classList.remove("file-attached", "img-attached", "active");
+
   // Generate user message HTML with optional file attachment
-  const userMsgHTML = 
-    `<p class="message-text"></p>
+  const userMsgHTML = `
+    <p class="message-text"></p>
     ${userData.file.data ? (userData.file.isImage ? `<img src="data:${userData.file.mime_type};base64,${userData.file.data}" class="img-attachment" />` : `<p class="file-attachment"><span class="material-symbols-rounded">description</span>${userData.file.fileName}</p>`) : ""}
   `;
+
   const userMsgDiv = createMessageElement(userMsgHTML, "user-message");
   userMsgDiv.querySelector(".message-text").textContent = userData.message;
   chatsContainer.appendChild(userMsgDiv);
   scrollToBottom();
+
   setTimeout(() => {
     // Generate bot message HTML and add in the chat container
     const botMsgHTML = `<img class="avatar" src="gemini.svg" /> <p class="message-text">Chale, gimme one sec... </p>`;
@@ -232,7 +243,8 @@ document.querySelector("#stop-response-btn").addEventListener("click", () => {
   controller?.abort();
   userData.file = {};
   clearInterval(typingInterval);
-  chatsContainer.querySelector(".bot-message.loading").classList.remove("loading");
+  const loadingMsg = chatsContainer.querySelector(".bot-message.loading");
+  if (loadingMsg) loadingMsg.classList.remove("loading");
   document.body.classList.remove("bot-responding");
 });
 
